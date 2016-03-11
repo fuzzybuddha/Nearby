@@ -13,8 +13,12 @@
 				}
 			);
 
+
 			// modal handler
-			$('.modal-trigger').leanModal();
+			$('.modal-trigger').leanModal({
+				ready: function() { modal_flag = true; }, // Callback for Modal open
+				complete: function() { modal_flag = false; } // Callback for Modal close
+			});
 
 			// set options variables
 			$("#radius_from_location").val(radius_from_location);
@@ -57,7 +61,7 @@
 
 	<?php
 		if (!$this->session->userdata('logged_in')){
-			$this->load->view('/partials/login_reg');
+			// $this->load->view('/partials/login_reg');
 	 	}
 	?>
 	<!--============================= Search ==================================-->
@@ -99,11 +103,12 @@
 			</div>
 		</form>
 
-		<a id="options-link" href="#options" class="col s5 m3 l2 right modal-trigger options-link"><i class="fa fa-cog"></i> Search Options</a>
+		<a id="options-link" href="" class="col s5 m3 l2 right options-link"><i class="fa fa-cog"></i> Search Options</a>
 	</div>
 
 	<!--============================= options ================================-->
 	<?php
+		$this->load->view('/partials/no_res');
 		$this->load->view('/partials/options');
 	?>
 
